@@ -2,7 +2,7 @@
 // https://github.com/chimurai/http-proxy-middleware
 module.exports = {
   '/api/': {
-    target: 'http://localhost:3000',
+    target: 'http://ypber.com:3000',
     changeOrigin: true
   },
 }

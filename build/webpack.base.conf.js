@@ -43,7 +43,7 @@ module.exports = {
       'css': resolve('static/css'),
       'js': resolve('static/js'),
       'img': resolve('static/img'),
-      'utils': resolve('../utils')
+      'utils': resolve('static/utils')
     }
   },
   module: {
