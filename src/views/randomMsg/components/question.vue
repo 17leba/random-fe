@@ -61,9 +61,10 @@ export default {
         hasLoved: this.question.has_loved
       })
 
-      this.$nextTick(() => {
+      // node handle
+      /*this.$nextTick(() => {
         this.renderImage()
-      })
+      })*/
     },
     renderImage() {
       Array.from(document.querySelectorAll('.lazy')).forEach((v, i) => {
