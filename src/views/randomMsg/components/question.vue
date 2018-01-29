@@ -44,8 +44,8 @@ export default {
   },
   watch: {
     status() {
-      this.getData()
       this.resetPath()
+      this.getData()
     }
   },
   methods: {
