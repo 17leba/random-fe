@@ -34,7 +34,8 @@ export default {
     }
   },
   props: [
-    'status'
+    'status',
+    'resetPath'
   ],
   created() {
     this.$store.dispatch('onType', this.$route.name)
@@ -44,6 +45,7 @@ export default {
   watch: {
     status() {
       this.getData()
+      this.resetPath()
     }
   },
   methods: {
