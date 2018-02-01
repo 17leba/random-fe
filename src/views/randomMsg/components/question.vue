@@ -46,6 +46,7 @@ export default {
     status() {
       this.resetPath()
       this.getData()
+      this.resetPath()
     }
   },
   methods: {
