@@ -55,9 +55,9 @@ export default {
         hasLoved: data.has_loved
       })
 
-      this.$nextTick(() => {
+     /* this.$nextTick(() => {
         this.renderNews()
-      })
+      })*/
     },
     renderNews() {
       this.news.img.forEach(v => {
