@@ -32,10 +32,10 @@ export default {
   },
   computed: {
     ...mapState({
-          isLoading: state => state.random.isLoading,
-          userId: state => state.user.userInfo.user_id,
-          loveData: state => state.random.loveData,
-          isShowFeatureBtn: state => state.random.isShowFeatureBtn
+      isLoading: state => state.random.isLoading,
+      userId: state => state.user.userInfo.user_id,
+      loveData: state => state.random.loveData,
+      isShowFeatureBtn: state => state.random.isShowFeatureBtn
     })
   },
   components: {
