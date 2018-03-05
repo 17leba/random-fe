@@ -14,6 +14,11 @@
             :class="{ select: loveData.hasLoved }"
             @click="loveContent"
             v-show="isShowFeatureBtn"></button>
+    <button class="feedback-btn"
+            @click="feedback"></button>
+    <feedback 
+            @closeFeedback="closeFeedback"
+            v-show="showFeedback"/>
 </div>
 
 </template>
@@ -21,13 +26,15 @@
 <script>
 import { mapState } from 'vuex';
 import { Spinner, Toast } from 'mint-ui';
+import feedback from './components/feedback';
 import myFooter from './components/footer';
 import axios from 'utils/curl';
 export default {
   data() {
     return {
       status: false,
-      loveTag: 0
+      loveTag: 0,
+      showFeedback: false
     }
   },
   computed: {
@@ -39,6 +46,7 @@ export default {
     })
   },
   components: {
+    feedback,
     myFooter,
     Spinner
   },
@@ -68,6 +76,12 @@ export default {
       } else {
         Toast(res.message)
       }
+    },
+    feedback (){
+      this.showFeedback = true
+    },
+    closeFeedback (){
+      this.showFeedback = false
     }
   }
 }
@@ -116,5 +130,12 @@ export default {
     &.select {
         background-image: url(~img/random/love-selected.png);
     }
+}
+
+.feedback-btn{
+    @include scopeBtn;
+    top: rem(110);
+    background-image: url(~img/random/feedback.png);
+    background-size: rem(20) auto;
 }
 </style>
