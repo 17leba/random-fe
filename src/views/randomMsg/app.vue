@@ -88,7 +88,8 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
+  @import '~css/common/mixin';
   img{
     max-width: rem(350);
   }
