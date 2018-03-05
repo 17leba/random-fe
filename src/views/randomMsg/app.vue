@@ -88,6 +88,11 @@ export default {
 
 </script>
 
+<style>
+  img{
+    max-width: rem(350);
+  }
+</style>
 <style lang="scss" scoped="">
 @import '~css/common/mixin';
 @mixin scopeBtn {
