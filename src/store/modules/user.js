@@ -6,8 +6,8 @@ const state = {
 }
 
 const actions = {
-  async getLogin ({ commit, state }){
-    let res = await api.isLogin()
+  async getLogin ({ commit, state }, para){
+    let res = await api.isLogin(para)
     commit('getLogin', res)
     return res
   },

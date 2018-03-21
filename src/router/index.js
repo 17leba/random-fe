@@ -12,47 +12,104 @@ const randomMovie = () => import('@/views/randomMsg/components/movie')
 const myCenter = () => import('@/views/randomMsg/components/myCenter')
 const loveList = () => import('@/views/randomMsg/components/loveList')
 
+// blog
+const admin = () => import('@/views/blog/admin')
+const blog = () => import('@/views/blog/app')
+
+const article = () => import('@/views/blog/components/user/article')
+const blogList = () => import('@/views/blog/components/user/list')
+
+const editArticle = () => import('@/views/blog/components/admin/article')
+const articleList = () => import('@/views/blog/components/admin/list')
+
 export default new Router({
   mode: 'history',
-  routes: [{
-    path: '/random',
-    component: random,
-    children: [
-      {
-        path: 'question',
-        name: 'question',
-        component: randomQuestion
-      },
-      {
-        path: 'news',
-        name: 'news',
-        component: randomNews
-      },
-      {
-        path: 'music',
-        name: 'music',
-        component: randomMusic
-      },
-      {
-        path: 'book',
-        name: 'book',
-        component: randomBook
-      },
-      {
-        path: 'movie',
-        name: 'movie',
-        component: randomMovie
-      },
-      {
-        path: 'center',
-        name: 'center',
-        component: myCenter
-      },
-      {
-        path: 'love_list',
-        name: 'loveList',
-        component: loveList
-      }
-    ]
-  }]
+  routes: [
+    {
+      path: '/random',
+      component: random,
+      children: [
+        {
+          path: 'question',
+          name: 'question',
+          component: randomQuestion
+        },
+        {
+          path: 'news',
+          name: 'news',
+          component: randomNews
+        },
+        {
+          path: 'music',
+          name: 'music',
+          component: randomMusic
+        },
+        {
+          path: 'book',
+          name: 'book',
+          component: randomBook
+        },
+        {
+          path: 'movie',
+          name: 'movie',
+          component: randomMovie
+        },
+        {
+          path: 'center',
+          name: 'center',
+          component: myCenter
+        },
+        {
+          path: 'love_list',
+          name: 'loveList',
+          component: loveList
+        }
+      ]
+    },
+    {
+      path: '/blog/admin',
+      component: admin,
+      children: [
+        {
+          path: '',
+          component: articleList
+        },
+        {
+          path: 'list/:id',
+          name: 'list',
+          component: articleList
+        },
+        {
+          path: ':id/edit',
+          name: 'editArticle',
+          component: editArticle
+        },
+        {
+          path: 'article/add',
+          name: 'addArticle',
+          component: editArticle
+        }
+      ]
+    },
+    {
+      path:  '/blog',
+      component: blog,
+      children: [
+        {
+          path: '',
+          component: blogList
+        },
+        {
+          path: 'list/:id',
+          name: 'article-list',
+          component: blogList
+        },
+        {
+          path: 'article/:id',
+          name: 'article-detail',
+          component: article
+        }
+      ]
+    }
+  ]
 })

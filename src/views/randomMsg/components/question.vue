@@ -73,12 +73,6 @@ export default {
         v.setAttribute('src', v.dataset.actualsrc)
       })
     }
-  },
-  filters: {
-    formatTime(time) {
-      let date = new Date(time * 1000)
-      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
-    }
   }
 }
 
