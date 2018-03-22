@@ -37,6 +37,7 @@ export default {
   },
 
   created() {
+    document.title = "YPBer's Blog"
     this.getList(this.curPage)
   },
   methods: {

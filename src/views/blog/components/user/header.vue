@@ -1,6 +1,8 @@
 <template>
   <header>
-    <h1>YPBer's blog</h1>
+    <h1>
+      <router-link :to="{ name: 'home' }">YPBer's Blog</router-link>
+    </h1>
   </header>
 
 </template>

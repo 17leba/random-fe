@@ -97,6 +97,7 @@ export default new Router({
       children: [
         {
           path: '',
+          name: 'home',
           component: blogList
         },
         {

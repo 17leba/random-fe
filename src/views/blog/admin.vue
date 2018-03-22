@@ -1,10 +1,9 @@
 <template>
-<div>
+<div v-show="hasData">
     <Header />
     <router-view class="main" v-if="userInfo.isLogin"/>
     <Login v-if="!userInfo.isLogin"/>
 </div>
-
 </template>
 
 <script>
@@ -13,27 +12,23 @@ import Header from './components/admin/header';
 import Login from './components/admin/login';
 
 export default {
-
   data() {
     return {
+      hasData: false,
+      userInfo: {}
     }
   },
   components: {
     Header,
     Login
   },
-  created (){
-    this.$store.dispatch('getLogin',{
+  async created (){
+    this.userInfo = await this.$store.dispatch('getLogin',{
       type: 'admin'
     })
-  },
-  computed: {
-    ...mapState({
-          userInfo: state => state.user.userInfo
-    })
-  },
+    this.hasData = true
+  }
 }
-
 </script>
 
 <style lang="scss" scoped="">

@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h1>{{ result.title }}</h1>
-    <span class="date">{{ result.modified_time|formatDate }}</span>
+    <span class="date">{{ result.create_time|formatDate }}</span>
     <div class="ql-show" v-html="result.content"></div>
   </div>
 
@@ -21,6 +21,7 @@ export default {
     let res = await axios.get(`/api/article/${this.$route.params.id}`)
     if(res.success){
       this.result = res.data
+      document.title = this.result.title
     }else{
       Toast(res.message)
     }

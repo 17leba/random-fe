@@ -51,6 +51,7 @@ export default {
     Spinner
   },
   created() {
+    document.title = 'Random Messages'
     this.$store.dispatch('getLogin')
   },
   methods: {
