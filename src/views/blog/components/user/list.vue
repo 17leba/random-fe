@@ -7,7 +7,7 @@
             :to="{ name: 'article-detail',params: { id: item.id } }"
             class="link">{{ item.title }}</router-link>
         </h2>
-        <span class="time">{{ item.modified_time|formatDate }}</span>
+        <span class="time">{{ item.create_time|formatDate }}</span>
         <div v-html="item.description" class="description">
         </div>
       </li>
