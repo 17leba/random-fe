@@ -14,16 +14,20 @@ import Login from './components/admin/login';
 export default {
   data() {
     return {
-      hasData: false,
-      userInfo: {}
+      hasData: false
     }
   },
   components: {
     Header,
     Login
   },
+  computed: {
+    ...mapState({
+        userInfo: state => state.user.userInfo
+    })
+  },
   async created (){
-    this.userInfo = await this.$store.dispatch('getLogin',{
+    await this.$store.dispatch('getLogin',{
       type: 'admin'
     })
     this.hasData = true
