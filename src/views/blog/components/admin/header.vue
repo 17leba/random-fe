@@ -1,6 +1,8 @@
 <template>
   <header>
-    <h1>Admin</h1>
+    <h1>
+      <router-link :to="{ name: 'adminHome' }">Admin</router-link>
+    </h1>
     <Button type="primary" size="small" class="btn" @click="addArticle">添加文章</Button>
   </header>
 

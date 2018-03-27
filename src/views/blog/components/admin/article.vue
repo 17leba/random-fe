@@ -67,9 +67,12 @@ export default {
         article_id: this.$route.params.id || '',
         title: this.title,
         content: this.content
+      }).catch(error => {
+        this.isSaving = false
       })
       Toast(result.message)
       this.isSaving = false
+      
       if (result.success) {
         setTimeout(() => {
           this.$router.push({

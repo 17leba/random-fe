@@ -72,6 +72,7 @@ export default new Router({
       children: [
         {
           path: '',
+          name: 'adminHome',
           component: articleList
         },
         {
