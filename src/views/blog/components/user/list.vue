@@ -4,7 +4,7 @@
       <li class="list" v-for="item in result">
         <h2>
           <router-link 
-            :to="{ name: 'article-detail',params: { id: item.id } }"
+            :to="{ name: 'articleDetail',params: { id: item.id } }"
             class="link">{{ item.title }}</router-link>
         </h2>
         <span class="time">{{ item.create_time|formatDate }}</span>
@@ -14,7 +14,7 @@
     </ul>
     <div class="tags">
       <Badge size="normal" v-for="item in tags" :key="item">
-        <router-link :to="{ name: 'tag-search',params: { tag: item } }" class="tag">{{ item }}</router-link>
+        <router-link :to="{ name: 'tagSearch',params: { tag: item } }" class="tag">{{ item }}</router-link>
       </Badge>
     </div>
     <page 
@@ -57,6 +57,7 @@ export default {
         if (res.data.length) {
           this.result = res.data
         } else {
+          this.result = []
           this.noPage = true
         }
       } else {
@@ -80,7 +81,7 @@ export default {
       await this.getList(page)
       if (!this.noPage) {
         this.$router.push({
-          name: 'article-list',
+          name: 'articleList',
           params: {
             id: page
           }

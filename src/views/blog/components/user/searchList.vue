@@ -4,7 +4,7 @@
       <li class="list" v-for="item in result">
         <h2>
           <router-link 
-            :to="{ name: 'article-detail',params: { id: item.id } }"
+            :to="{ name: 'articleDetail',params: { id: item.id } }"
             class="link">{{ item.title }}</router-link>
         </h2>
         <span class="time">{{ item.create_time|formatDate }}</span>
@@ -13,7 +13,7 @@
       </li>
     </ul>
     <page 
-    :curPage="curPage"
+      :curPage="curPage"
       :changePage="changePage" />
   </div>
 </template>
@@ -28,8 +28,10 @@ export default {
     return {
       result: [],
       tags: [],
-      curPage: +this.$route.query.id || 1,
-      noPage: false
+      curPage: +this.$route.query.page || 1,
+      noPage: false,
+      curlUrl: '',
+      params: {}
     }
   },
   components: {
@@ -39,18 +41,43 @@ export default {
 
   created() {
     document.title = "YPBer's Blog"
+    // judge url
+    this.judgeUrl(this.$route.name)
     this.getList(this.curPage)
   },
+  watch: {
+    '$route' (to,from){
+      // judge url
+      this.judgeUrl(this.$route.name)
+      this.getList(this.curPage)
+    }
+  },
   methods: {
+    judgeUrl (name){
+      switch(name){
+        case 'tagSearch':
+        this.curlUrl = '/api/tag/list'
+        this.params = {
+          tag: this.$route.params.tag
+        }
+        break
+        case 'querySearch':
+        this.curlUrl = '/api/search'
+        this.params = {
+          query: this.$route.params.query
+        }
+        break
+      }
+    },
     async getList(page) {
-      let res = await axios.get('/api/tag/list', {
-        page: page,
-        tag: this.$route.params.tag
-      })
+      let res = await axios.get(this.curlUrl, Object.assign(this.params, {
+        page: page
+      }))
       if (res.success) {
         if (res.data.length) {
           this.result = res.data
         } else {
+          this.result = []
           this.noPage = true
         }
       } else {
@@ -66,7 +93,7 @@ export default {
       await this.getList(page)
       if (!this.noPage) {
         this.$router.push({
-          name: 'tag-search',
+          name: 'tagSearch',
           params: {
             tag: this.$route.params.tag
           },

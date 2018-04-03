@@ -2,27 +2,41 @@
   <header>
     <h1>
       <router-link :to="{ name: 'home' }">YPBer's Blog</router-link>
+      <div class="search">
+        <input type="text" class="search-input" v-model="query" @keyup.enter="submit"/>
+        <Button type="primary" size="small" @click="submit">搜索</Button>
+      </div>
     </h1>
   </header>
 
 </template>
 
 <script>
-import { Button } from 'mint-ui'
+import { Button, Toast } from 'mint-ui'
 
 export default {
   data() {
     return {
+      query: ''
     }
   },
   components: {
-    Button
+    Button,
+    Toast
   },
   methods: {
-    addArticle (){
+    submit (){
+      if(!this.query.trim()){
+        Toast('搜索内容为空！')
+        return
+      }
       this.$router.push({
-        name: 'addArticle'
+        name: 'querySearch',
+        params: {
+          query: this.query
+        }
       })
+      
     }
   }
 }
@@ -31,6 +45,7 @@ export default {
 
 <style lang="scss" scoped="">
 @import '~css/common/var';
+@import '~css/common/mixin';
 header {
     position: fixed;
     left: 0;
@@ -47,5 +62,23 @@ header {
 }
 h1{
   font-size: 24px;
+}
+.search{
+  float: right;
+  display: flex;
+  overflow: hidden;
+  button{
+    @include button;
+    width: 60px;
+    border-radius: 0 3px 3px 0;
+  }
+}
+.search-input{
+  @include input;
+  width: 200px;  
+  text-indent: 10px;
+  border: 1px solid $commonColor;
+  border-right: none;
+  border-radius: 3px 0  0 3px;
 }
 </style>
