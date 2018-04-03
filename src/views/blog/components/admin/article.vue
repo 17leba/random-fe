@@ -4,6 +4,10 @@
            placeholder="文章标题"
            v-model="title"
            class="title">
+    <input type="text"
+           placeholder="添加标签（用|隔开）"
+           v-model="tags"
+           class="tags">
     <vue-editor v-model="content"
                 @imageAdded="handleImageAdded"
                 useCustomImageHandler
@@ -31,6 +35,7 @@ export default {
       result: {},
       title: '',
       content: '',
+      tags: '',
       isSaving: false
     }
   },
@@ -46,6 +51,7 @@ export default {
 
       this.title = this.result.title
       this.content = this.result.content
+      this.tags = this.result.tags
     },
     async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
       let formData = new FormData()
@@ -66,7 +72,8 @@ export default {
       let result = await axios.post('/api/article/save', {
         article_id: this.$route.params.id || '',
         title: this.title,
-        content: this.content
+        content: this.content,
+        tags: this.tags
       }).catch(error => {
         this.isSaving = false
       })
@@ -94,13 +101,17 @@ export default {
 </style>
 <style lang="scss" scoped>
 @import '~css/common/mixin';
-.title{
+.title,.tags{
   @include input;
   border: 1px solid #aaa;
   height: 40px;
   padding-left: 20px;
   font-size: 18px;
   margin-bottom: 15px;
+}
+.tags{
+  font-size: 16px;
+  color: #666;
 }
 .btn{
   display: block;

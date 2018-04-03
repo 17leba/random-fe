@@ -18,6 +18,7 @@ const blog = () => import('@/views/blog/app')
 
 const article = () => import('@/views/blog/components/user/article')
 const blogList = () => import('@/views/blog/components/user/list')
+const tagList = () => import('@/views/blog/components/user/tagList')
 
 const editArticle = () => import('@/views/blog/components/admin/article')
 const articleList = () => import('@/views/blog/components/admin/list')
@@ -110,6 +111,11 @@ export default new Router({
           path: 'article/:id',
           name: 'article-detail',
           component: article
+        },
+        {
+          path: 'tag/:tag',
+          name: 'tag-search',
+          component: tagList
         }
       ]
     }

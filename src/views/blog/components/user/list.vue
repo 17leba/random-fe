@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul>
+  <div class="wrap">
+    <ul class="left">
       <li class="list" v-for="item in result">
         <h2>
           <router-link 
@@ -12,6 +12,11 @@
         </div>
       </li>
     </ul>
+    <div class="tags">
+      <Badge size="normal" v-for="item in tags">
+        <router-link :to="{ name: 'tag-search',params: { tag: item } }" class="tag">{{ item }}</router-link>
+      </Badge>
+    </div>
     <page 
     :curPage="curPage"
       :changePage="changePage" />
@@ -20,25 +25,28 @@
 
 <script>
 import axios from 'utils/curl';
-import { Button, Toast } from 'mint-ui';
+import { Button, Toast, Badge } from 'mint-ui';
 import page from './../page'
 
 export default {
   data() {
     return {
       result: [],
+      tags: [],
       curPage: +this.$route.params.id || 1,
       noPage: false
     }
   },
   components: {
     Button,
-    page
+    page,
+    Badge
   },
 
   created() {
     document.title = "YPBer's Blog"
     this.getList(this.curPage)
+    this.getTags()
   },
   methods: {
     async getList(page) {
@@ -55,6 +63,14 @@ export default {
         Toast(res.message)
       }
       return res
+    },
+    async getTags (){
+      let res = await axios.get('/api/tags')
+      if(res.success){
+        this.tags = res.data
+      }else{
+        Toast(res.message)
+      }
     },
     async changePage(page) {
       if (page <= 0) {
@@ -81,6 +97,25 @@ export default {
 
 <style lang="scss" scoped="">
 @import '~css/common/var';
+.wrap{
+  overflow: hidden;
+}
+.left{
+  float: left;
+  width: 80%;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #ccc;
+}
+.tags{
+  overflow: hidden;
+  span{
+    margin: 5px;
+  }
+  .tag{
+    color: #fff;
+  }
+}
 .list{
   margin-bottom: 30px;
   h2{
@@ -103,8 +138,8 @@ export default {
     color: $commonColor;
   }
 }
-.page {
-    display: flex;
-    justify-content: center;
+.page{
+  clear: both;
+  text-align: center;
 }
 </style>
