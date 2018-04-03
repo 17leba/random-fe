@@ -13,12 +13,12 @@
       </li>
     </ul>
     <div class="tags">
-      <Badge size="normal" v-for="item in tags">
+      <Badge size="normal" v-for="item in tags" :key="item">
         <router-link :to="{ name: 'tag-search',params: { tag: item } }" class="tag">{{ item }}</router-link>
       </Badge>
     </div>
     <page 
-    :curPage="curPage"
+      :curPage="curPage"
       :changePage="changePage" />
   </div>
 </template>
@@ -98,18 +98,17 @@ export default {
 <style lang="scss" scoped="">
 @import '~css/common/var';
 .wrap{
-  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
 }
 .left{
-  float: left;
-  width: 80%;
+  max-width: 800px;
   margin-right: 10px;
   padding-right: 10px;
-  border-right: 1px solid #ccc;
 }
 .tags{
-  overflow: hidden;
   span{
+    padding: 5px 10px;
     margin: 5px;
   }
   .tag{
@@ -139,7 +138,8 @@ export default {
   }
 }
 .page{
-  clear: both;
+  width: 100%;
   text-align: center;
+  margin: 30px;
 }
 </style>
