@@ -108,6 +108,7 @@ export default {
   padding-right: 10px;
 }
 .tags{
+  max-width: 250px;
   span{
     padding: 5px 10px;
     margin: 5px;
