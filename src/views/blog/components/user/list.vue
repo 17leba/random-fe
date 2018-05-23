@@ -57,7 +57,7 @@ export default {
         if (res.data.length) {
           this.result = res.data
         } else {
-          this.result = []
+          // this.result = []
           this.noPage = true
         }
       } else {
@@ -79,17 +79,17 @@ export default {
         return
       }
       await this.getList(page)
-      if (!this.noPage) {
-        this.$router.push({
-          name: 'articleList',
-          params: {
-            id: page
-          }
-        })
-        this.curPage = page
-      } else {
+      if(this.noPage){
         Toast('已到最后一页')
+        return
       }
+      this.$router.push({
+        name: 'articleList',
+        params: {
+          id: page
+        }
+      })
+      this.curPage = page
     }
   }
 }
