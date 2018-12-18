@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import * as filters from './filters'
+import 'static/js/share.js'
 
 Vue.config.productionTip = false
 
